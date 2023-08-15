@@ -63,6 +63,7 @@ const Header = ({ children, className }: IHeaderProps) => {
           </Fragment>
         </div>
       </div>
+      {children}
     </div>
   );
 };
