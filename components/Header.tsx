@@ -6,6 +6,7 @@ import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
 import Button from "./Button";
+import useAuthModal from "@/hooks/useAuthModal";
 
 interface IHeaderProps {
   children: React.ReactNode;
@@ -14,7 +15,9 @@ interface IHeaderProps {
 
 const Header = ({ children, className }: IHeaderProps) => {
   const router = useRouter();
+  const authModal = useAuthModal();
   const handleLogout = () => {};
+  console.log({ authModal });
   return (
     <div
       className={twMerge(
@@ -50,13 +53,13 @@ const Header = ({ children, className }: IHeaderProps) => {
             <div className="">
               <Button
                 className="bg-transparent text-neutral-300 font-medium"
-                onClick={() => null}
+                onClick={authModal.onOpen}
               >
                 Sign Up
               </Button>
             </div>
             <div className="">
-              <Button className="bg-white px-6 py-2" onClick={() => null}>
+              <Button className="bg-white px-6 py-2" onClick={authModal.onOpen}>
                 Login
               </Button>
             </div>
