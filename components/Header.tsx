@@ -10,6 +10,7 @@ import useAuthModal from "@/hooks/useAuthModal";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useUser } from "@/hooks/useUser";
 import { FaUserAlt } from "react-icons/fa";
+import { toast } from "react-hot-toast";
 
 interface IHeaderProps {
   children: React.ReactNode;
@@ -25,7 +26,11 @@ const Header = ({ children, className }: IHeaderProps) => {
     const { error } = await supabaseClient.auth.signOut();
     router.refresh();
 
-    if (error) console.log("error", error);
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("User Logged out successfully!");
+    }
   };
   console.log({ authModal, user });
   return (
