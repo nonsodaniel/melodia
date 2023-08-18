@@ -45,7 +45,6 @@ const UploadModal = () => {
     }
   };
   const submit: SubmitHandler<FieldValues> = async (values) => {
-    console.log({ values });
     try {
       setIsLoading(true);
       const imageFile = values.image?.[0];

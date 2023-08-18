@@ -5,8 +5,6 @@ import PageContents from "./components/PageContents";
 
 export default async function Home() {
   const songs = await fetchSongs();
-  console.log("called");
-  console.log({ songs });
   return (
     <div className="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto ">
       <Header>
