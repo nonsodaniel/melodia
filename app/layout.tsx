@@ -24,7 +24,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const userSongs = await fetchSongsByUserId();
-  console.log({ user: userSongs });
   return (
     <html lang="en">
       <body className={font.className}>

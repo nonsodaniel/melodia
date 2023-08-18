@@ -19,7 +19,7 @@ const fetchSongsByUserId = async (): Promise<Song[]> => {
   if (error) {
     console.log(error.message);
   }
-  console.log({ data });
+
   return (data as any) || [];
 };
 
