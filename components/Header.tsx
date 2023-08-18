@@ -32,7 +32,6 @@ const Header = ({ children, className }: IHeaderProps) => {
       toast.success("User Logged out successfully!");
     }
   };
-  console.log({ authModal, user });
   return (
     <div
       className={twMerge(

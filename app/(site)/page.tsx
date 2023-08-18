@@ -1,7 +1,11 @@
+import fetchSongs from "@/actions/fetchSong";
 import Header from "@/components/Header";
 import ListItem from "@/components/ListItem";
 
-export default function Home() {
+export default async function Home() {
+  const songs = await fetchSongs();
+  console.log("called");
+  console.log({ songs });
   return (
     <div className="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto ">
       <Header>
@@ -20,7 +24,11 @@ export default function Home() {
         <div className="flex justify-between items-center">
           <h1 className="text-white text-2xl font-semibold">Latest Songs</h1>
         </div>
-        <div className="">List of Songs</div>
+        {songs.map((song) => (
+          <div key={song.id} className="">
+            {song.title}
+          </div>
+        ))}
       </div>
     </div>
   );
