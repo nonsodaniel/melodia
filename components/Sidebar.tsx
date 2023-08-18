@@ -26,7 +26,7 @@ const Sidebar = ({ children, songs }: ISidebarProps) => {
       {
         label: "Search",
         active: pathName === "/search",
-        href: "/",
+        href: "/search",
         icon: BiSearch,
       },
     ],
