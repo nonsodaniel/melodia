@@ -38,7 +38,13 @@ const Modal = ({
           </ModalDialog.Description>
           <div className="">{children}</div>
           <ModalDialog.Close asChild>
-            <button className="text-neutral-400 hover:text-white absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-centet justify-center rounded-full focus:outline-none"></button>
+            <button
+              className="text-neutral-400 hover:text-white absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-centet justify-center rounded-full focus:outline-none"
+              aria-label="Close"
+            >
+              {" "}
+              <IoMdClose />
+            </button>
           </ModalDialog.Close>
         </ModalDialog.Content>
       </ModalDialog.Portal>
