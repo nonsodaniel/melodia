@@ -2,15 +2,15 @@
 
 import { Song } from "@/types";
 import MediaItem from "./MediaItem";
+import LikeButton from "./LikeButton";
 
 interface ISearchContentProps {
   songs: Song[];
 }
 const SearchContent = ({ songs }: ISearchContentProps) => {
-  console.log({ songs });
   if (!songs.length) {
     return (
-      <div className="flex flex-col gap-y-2 wi-full px-6 text-neutral-400">
+      <div className="flex flex-col gap-y-2 w-full px-6 text-neutral-400">
         No Songs found
       </div>
     );
@@ -22,6 +22,7 @@ const SearchContent = ({ songs }: ISearchContentProps) => {
           <div className="flex-1">
             <MediaItem key={song.id} song={song} />
           </div>
+          <LikeButton songId={song.id} />
         </div>
       ))}
     </div>
