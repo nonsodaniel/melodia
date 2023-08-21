@@ -5,9 +5,9 @@ import { Figtree } from "next/font/google";
 import SupabaseProvider from "@/providers/SupabaseProvider";
 import UserProvider from "@/providers/UserProvider";
 import Modalprovider from "@/providers/Modalprovider";
-import { Toaster } from "react-hot-toast";
 import ToastProvider from "@/providers/ToastProvider";
 import fetchSongsByUserId from "@/actions/fetchSongsByUserId";
+import MusicPlayer from "@/components/MusicPlayer";
 
 const font = Figtree({ subsets: ["latin"] });
 
@@ -32,6 +32,7 @@ export default async function RootLayout({
           <UserProvider>
             <Modalprovider />
             <Sidebar songs={userSongs}>{children}</Sidebar>
+            <MusicPlayer />
           </UserProvider>
         </SupabaseProvider>
       </body>

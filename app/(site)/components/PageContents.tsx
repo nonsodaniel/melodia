@@ -1,6 +1,7 @@
 "use client";
 
 import SongItem from "@/components/SongItem";
+import useOnPlay from "@/hooks/useOnPlay";
 import { Song } from "@/types";
 
 interface IPageContentProps {
@@ -8,6 +9,7 @@ interface IPageContentProps {
 }
 
 const PageContents = ({ songs }: IPageContentProps) => {
+  const onPlay = useOnPlay(songs);
   if (!!songs?.length) {
     <div className="mt-4 text-neutral-400">PageContents</div>;
   }
@@ -18,7 +20,7 @@ const PageContents = ({ songs }: IPageContentProps) => {
         <SongItem
           key={song.id}
           data={song}
-          handleClick={(id: string) => console.log(id)}
+          handleClick={(id: string) => onPlay(id)}
         />
       ))}
     </div>

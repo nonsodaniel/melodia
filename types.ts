@@ -60,3 +60,11 @@ export interface Song {
   song_path: string;
   image_path: string;
 }
+
+export interface MusicPlayer {
+  ids: string[];
+  activeId?: string;
+  reset: () => void;
+  setIds: (id: string[]) => void;
+  setId: (id: string) => void;
+}
