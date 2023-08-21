@@ -8,7 +8,7 @@ interface ISearchProps {
     title: string;
   };
 }
-
+export const revalidate = 0;
 const Search = async ({ searchParams }: ISearchProps) => {
   const songs = await fetchSongsByTitle(searchParams.title);
 
