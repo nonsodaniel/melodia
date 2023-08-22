@@ -6,7 +6,6 @@ import useAuthModal from "./useAuthModal";
 import { useUser } from "./useUser";
 
 const useOnPlay = (songs: Song[]) => {
-  const supabaseClient = useSupabaseClient();
   const player = useMusicPlayer();
   const authModal = useAuthModal();
   const { user } = useUser();

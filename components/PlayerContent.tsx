@@ -1,6 +1,6 @@
-"use client";
+// "use client";
 import { Song } from "@/types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MediaItem from "./MediaItem";
 import LikeButton from "./LikeButton";
 import { BsPauseFill, BsPlayFill } from "react-icons/bs";
@@ -9,12 +9,14 @@ import { HiSpeakerXMark, HiSpeakerWave } from "react-icons/hi2";
 import Slider from "./Slider";
 import useMusicPlayer from "@/hooks/useMusicPlayer";
 import useSound from "use-sound";
+
 interface IPlayerContentProps {
   song: Song;
   songUrl: string;
 }
 
 const PlayerContent = ({ song, songUrl }: IPlayerContentProps) => {
+  console.log({ comp: songUrl });
   const [volume, setVolume] = useState(1);
   const Icon = true ? BsPauseFill : BsPlayFill;
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
@@ -45,7 +47,42 @@ const PlayerContent = ({ song, songUrl }: IPlayerContentProps) => {
     player.setId(prevSong);
   };
 
-  const [play, { pause, sound }] = useSound(songUrl);
+  const [play, { pause, sound }] = useSound(songUrl, {
+    volume,
+    onplay: () => setIsMusicPlaying(true),
+    onend: () => {
+      playNextSong();
+      setIsMusicPlaying(false);
+    },
+    onpause: () => setIsMusicPlaying(false),
+    format: ["mp3"],
+  });
+  useEffect(() => {
+    sound?.play();
+
+    return () => {
+      sound?.unload();
+    };
+  }, [sound]);
+
+  const handlePlay = () => {
+    if (!isMusicPlaying) {
+      play();
+    } else {
+      pause();
+    }
+  };
+
+  const handleToggleMute = () => {
+    if (volume === 0) {
+      setVolume(1);
+    } else {
+      setVolume(0);
+    }
+  };
+
+  //   const [play] = useSound("/images/david.mp3");
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 h-full">
       <div className="flex w-full justify-start">
@@ -65,7 +102,10 @@ const PlayerContent = ({ song, songUrl }: IPlayerContentProps) => {
           className="text-neutral-400 cursor-pointer hover:text-white transition"
           onClick={playPrevSong}
         />
-        <div className="flex items-center justify-center h-10 w-10 rounded-full bg-white p-1 cursor-pointer">
+        <div
+          className="flex items-center justify-center h-10 w-10 rounded-full bg-white p-1 cursor-pointer"
+          onClick={handlePlay}
+        >
           <Icon size={30} className="text-black" />
         </div>
         <AiFillStepForward
@@ -76,8 +116,12 @@ const PlayerContent = ({ song, songUrl }: IPlayerContentProps) => {
       </div>
       <div className="hidden md:flex w-full justify-end pr-2">
         <div className="flex items-center gaaps-x-2 w-[120px]">
-          <VolumeIcon className="cursor-pointer" size={34} onClick={() => {}} />
-          <Slider />
+          <VolumeIcon
+            className="cursor-pointer"
+            size={34}
+            onClick={handleToggleMute}
+          />
+          <Slider value={volume} onChange={(value) => setVolume(value)} />
         </div>
       </div>
     </div>

@@ -38,6 +38,7 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
+    "@types/eslint": "8.44.2",
     "encoding": "^0.1.13",
     "supabase": "^1.86.0"
   }
