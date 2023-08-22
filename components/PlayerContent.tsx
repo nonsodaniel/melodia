@@ -8,6 +8,7 @@ import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
 import { HiSpeakerXMark, HiSpeakerWave } from "react-icons/hi2";
 import Slider from "./Slider";
 import useMusicPlayer from "@/hooks/useMusicPlayer";
+import useSound from "use-sound";
 interface IPlayerContentProps {
   song: Song;
   songUrl: string;
@@ -44,6 +45,7 @@ const PlayerContent = ({ song, songUrl }: IPlayerContentProps) => {
     player.setId(prevSong);
   };
 
+  const [play, { pause, sound }] = useSound(songUrl);
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 h-full">
       <div className="flex w-full justify-start">
