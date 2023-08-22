@@ -36,9 +36,17 @@ export interface Price {
   image?: string;
   metadata?: Stripe.Metadata;
   products?: Product;
+  product_id?: string;
+  currency?: string;
+  type?: Stripe.Price.Type;
+  interval?: Stripe.Price.Recurring.Interval;
+  interval_count?: number;
+  trial_period_days?: number | null;
+  unit_amount?: number;
 }
 export interface Product {
   id: string;
+  name: string;
   product_id?: string;
   active?: boolean;
   description?: string;
@@ -50,6 +58,7 @@ export interface Product {
   trial_period_days?: number | null;
   metadata?: Stripe.Metadata;
   products?: Product;
+  image: string | null;
 }
 
 export interface Song {
