@@ -16,12 +16,11 @@ interface IPlayerContentProps {
 }
 
 const PlayerContent = ({ song, songUrl }: IPlayerContentProps) => {
-  console.log({ comp: songUrl });
   const [volume, setVolume] = useState(1);
-  const Icon = true ? BsPauseFill : BsPlayFill;
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
-
   const player = useMusicPlayer();
+
+  const Icon = isMusicPlaying ? BsPauseFill : BsPlayFill;
   const VolumeIcon = volume === 0 ? HiSpeakerXMark : HiSpeakerWave;
 
   const playNextSong = () => {
@@ -47,24 +46,6 @@ const PlayerContent = ({ song, songUrl }: IPlayerContentProps) => {
     player.setId(prevSong);
   };
 
-  const [play, { pause, sound }] = useSound(songUrl, {
-    volume,
-    onplay: () => setIsMusicPlaying(true),
-    onend: () => {
-      playNextSong();
-      setIsMusicPlaying(false);
-    },
-    onpause: () => setIsMusicPlaying(false),
-    format: ["mp3"],
-  });
-  useEffect(() => {
-    sound?.play();
-
-    return () => {
-      sound?.unload();
-    };
-  }, [sound]);
-
   const handlePlay = () => {
     if (!isMusicPlaying) {
       play();
@@ -80,7 +61,26 @@ const PlayerContent = ({ song, songUrl }: IPlayerContentProps) => {
       setVolume(0);
     }
   };
-  console.log("volume", volume);
+
+  const [play, { pause, sound }] = useSound(songUrl, {
+    volume,
+    onplay: () => setIsMusicPlaying(true),
+    onend: () => {
+      playNextSong();
+      setIsMusicPlaying(false);
+    },
+    onpause: () => setIsMusicPlaying(false),
+    format: ["mp3"],
+  });
+
+  useEffect(() => {
+    sound?.play();
+
+    return () => {
+      sound?.unload();
+    };
+  }, [sound]);
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 h-full">
       <div className="flex w-full justify-start">
@@ -89,11 +89,11 @@ const PlayerContent = ({ song, songUrl }: IPlayerContentProps) => {
           <LikeButton songId={song.id} />
         </div>
       </div>
-      <div
-        className="flex md:hidden col-auto justify-end items-center w-full"
-        onClick={handlePlay}
-      >
-        <div className="h-10 w-10 flex items-center rounded-full bg-white p-1 cursor-pointer">
+      <div className="flex md:hidden col-auto justify-end items-center w-full">
+        <div
+          className="h-10 w-10 flex items-center rounded-full bg-white p-1 cursor-pointer"
+          onClick={handlePlay}
+        >
           <Icon size={30} className="text-black" />
         </div>
       </div>
