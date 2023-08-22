@@ -80,9 +80,7 @@ const PlayerContent = ({ song, songUrl }: IPlayerContentProps) => {
       setVolume(0);
     }
   };
-
-  //   const [play] = useSound("/images/david.mp3");
-
+  console.log("volume", volume);
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 h-full">
       <div className="flex w-full justify-start">
@@ -91,7 +89,10 @@ const PlayerContent = ({ song, songUrl }: IPlayerContentProps) => {
           <LikeButton songId={song.id} />
         </div>
       </div>
-      <div className="flex md:hidden col-auto justify-end items-center w-full">
+      <div
+        className="flex md:hidden col-auto justify-end items-center w-full"
+        onClick={handlePlay}
+      >
         <div className="h-10 w-10 flex items-center rounded-full bg-white p-1 cursor-pointer">
           <Icon size={30} className="text-black" />
         </div>
