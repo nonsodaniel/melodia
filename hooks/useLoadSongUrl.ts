@@ -10,7 +10,6 @@ const useLoadSongUrl = (song: Song) => {
     .from("songs")
     .getPublicUrl(song.song_path);
 
-  console.log(songData);
   return songData.publicUrl;
 };
 

@@ -20,7 +20,7 @@ const LikedDetails = ({ songs }: ILikedDetailsProps) => {
       router.replace("/");
     }
   }, [isLoading, user, router]);
-  console.log({ songs });
+
   if (!songs.length) {
     return (
       <div className="flex flex-col gap-y-2 w-full px-6 text-neutral-400">

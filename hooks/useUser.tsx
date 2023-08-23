@@ -51,8 +51,6 @@ export const MyUserContextProvider = (props: Props) => {
           const userDetailsPromise = results[0];
           const subscriptionPromise = results[1];
 
-          console.log("inside promise", subscriptionPromise);
-
           if (userDetailsPromise.status === "fulfilled")
             setUserDetails(userDetailsPromise.value.data as UserDetails);
 
@@ -64,7 +62,6 @@ export const MyUserContextProvider = (props: Props) => {
         }
       );
     } else if (!user && !isLoadingUser && !isLoadingData) {
-      console.log("inside else");
       setUserDetails(null);
       setSubscription(null);
     }
