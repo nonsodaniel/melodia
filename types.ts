@@ -77,3 +77,7 @@ export interface MusicPlayer {
   setIds: (id: string[]) => void;
   setId: (id: string) => void;
 }
+
+export interface ProductWithPrice extends Product {
+  prices?: Price[];
+}

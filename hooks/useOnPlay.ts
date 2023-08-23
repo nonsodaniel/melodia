@@ -4,17 +4,27 @@ import React from "react";
 import useMusicPlayer from "./useMusicPlayer";
 import useAuthModal from "./useAuthModal";
 import { useUser } from "./useUser";
+import useSubscribeModal from "./useSubscribeModal";
 
 const useOnPlay = (songs: Song[]) => {
   const player = useMusicPlayer();
   const authModal = useAuthModal();
-  const { user } = useUser();
+  const { user, subscription } = useUser();
+  const subscribeModal = useSubscribeModal();
+
   const onPlay = (id: string) => {
-    if (!user) return authModal.onOpen();
-    player.setId(id); //current song the user clicked on
-    const prevSongs = songs.map((song) => song.id);
-    player.setIds(prevSongs); //previously clicked songs
+    if (!user) {
+      return authModal.onOpen();
+    }
+
+    if (!subscription) {
+      return subscribeModal.onOpen();
+    }
+
+    player.setId(id);
+    player.setIds(songs.map((song) => song.id));
   };
+
   return onPlay;
 };
 
