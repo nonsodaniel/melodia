@@ -89,14 +89,28 @@ const PlayerContent = ({ song, songUrl }: IPlayerContentProps) => {
           <LikeButton songId={song.id} />
         </div>
       </div>
+
+      {/* MOBILE VIEW */}
       <div className="flex md:hidden col-auto justify-end items-center w-full">
+        <AiFillStepBackward
+          size={30}
+          className="text-neutral-400 cursor-pointer hover:text-white transition"
+          onClick={playPrevSong}
+        />
         <div
           className="h-10 w-10 flex items-center rounded-full bg-white p-1 cursor-pointer"
           onClick={handlePlay}
         >
           <Icon size={30} className="text-black" />
         </div>
+        <AiFillStepForward
+          size={30}
+          className="text-neutral-400 cursor-pointer hover:text-white transition"
+          onClick={playNextSong}
+        />
       </div>
+
+      {/* DESKTOP VIEW */}
       <div className="hidden h-full md:flex justify-center items-center w-full max-w-[722px] gap-x-6">
         <AiFillStepBackward
           size={30}
@@ -115,8 +129,9 @@ const PlayerContent = ({ song, songUrl }: IPlayerContentProps) => {
           onClick={playNextSong}
         />
       </div>
-      <div className="hidden md:flex w-full justify-end pr-2">
-        <div className="flex items-center gaaps-x-2 w-[120px]">
+
+      <div className="hidden mdd:flex w-full justify-end pr-2">
+        <div className="flex items-center gap-x-2 w-[120px]">
           <VolumeIcon
             className="cursor-pointer"
             size={34}
