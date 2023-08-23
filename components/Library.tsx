@@ -19,6 +19,7 @@ const Library = ({ songs }: ILibraryProps) => {
   const { user, subscription } = useUser();
   const onPlay = useOnPlay(songs);
   const subscribeModal = useSubscribeModal();
+  console.log({ subscription });
   const addLibrary = () => {
     if (!user) {
       return authModal.onOpen();
