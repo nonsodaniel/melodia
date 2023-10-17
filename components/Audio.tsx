@@ -2,6 +2,7 @@ import React, { useState, useRef, MouseEvent } from "react";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { Song } from "@/types";
+import LikeButton from "./LikeButton";
 
 interface AudioProps {
   source: string;
@@ -46,10 +47,16 @@ export default function Audio({
       onEnded={() => playNextSong()}
       onPlayError={() => console.log("An error occurred")}
       header={
-        <p className="text-center">
-          <span className="text-white truncate">{song.title} </span>
-          <span className="text-neutral-400 truncate">by {song.author}</span>
-        </p>
+        <div className="text-center flex justify-between flex-center ">
+          <p>
+            <span className="text-white truncate">{song.title} </span>
+            <span className="text-neutral-400 truncate">by {song.author}</span>
+          </p>
+
+          <span>
+            <LikeButton songId={song.id} iconSize="18" />
+          </span>
+        </div>
       }
       onClickNext={playNextSong}
       onClickPrevious={playPrevSong}

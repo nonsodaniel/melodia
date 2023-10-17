@@ -9,9 +9,10 @@ import toast from "react-hot-toast";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 interface ILikeButtonProps {
   songId: string;
+  iconSize?: string;
 }
 
-const LikeButton = ({ songId }: ILikeButtonProps) => {
+const LikeButton = ({ songId, iconSize }: ILikeButtonProps) => {
   const router = useRouter();
   const { user } = useUser();
   const authModal = useAuthModal();
@@ -72,8 +73,8 @@ const LikeButton = ({ songId }: ILikeButtonProps) => {
   };
 
   return (
-    <button className="transition hover:opacity-75" onClick={handleLike}>
-      <Icon color={isLiked ? "red" : "white"} size={25} />
+    <button className={` transition hover:opacity-75`} onClick={handleLike}>
+      <Icon color={isLiked ? "red" : "white"} size={iconSize || 25} />
     </button>
   );
 };
