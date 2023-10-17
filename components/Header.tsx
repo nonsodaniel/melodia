@@ -35,6 +35,7 @@ const Header = ({ children, className }: IHeaderProps) => {
       toast.success("User Logged out successfully!");
     }
   };
+  console.log({ user });
   return (
     <div
       className={twMerge(
@@ -42,6 +43,9 @@ const Header = ({ children, className }: IHeaderProps) => {
         className
       )}
     >
+      <span className="md:hidden block text-center pt-2 pb-5">
+        Welcome, <span className="text-yellow-500">{user?.email}</span>
+      </span>
       <div className="w-full mb-4 flex items-center justify-between">
         <div className="hidden md:flex gap-x-2 items-center">
           <button
@@ -57,6 +61,7 @@ const Header = ({ children, className }: IHeaderProps) => {
             <RxCaretRight size={35} className="text-white" />
           </button>
         </div>
+
         <div className="flex md:hidden gap-x-2 items-center">
           <button className="rounded-full bg-white p-2 flex flex items-center justify-center hover:opacity-75 transition">
             <HiHome size={20} className="text-black" />
@@ -67,17 +72,24 @@ const Header = ({ children, className }: IHeaderProps) => {
         </div>
         <div className="flex justify-between items-center gap-x-4">
           {user ? (
-            <div className="flex gap-x-4 items-center">
-              <Button className="bg-white px-6 py-2" onClick={handleLogout}>
-                Logout
-              </Button>
-              <Button
-                className="bg-white "
-                onClick={() => router.push("/account")}
-              >
-                <FaUserAlt />
-              </Button>
-            </div>
+            <Fragment>
+              <div className="flex gap-x-2 items-center">
+                <span className="md:block hidden">
+                  Welcome,{" "}
+                  <span className="text-yellow-500">{user?.email}</span>
+                </span>
+                <Button className="bg-white px-6 py-2" onClick={handleLogout}>
+                  Logout
+                </Button>
+
+                <Button
+                  className="bg-white w-10"
+                  onClick={() => router.push("/account")}
+                >
+                  <FaUserAlt />
+                </Button>
+              </div>
+            </Fragment>
           ) : (
             <Fragment>
               <div className="">
